@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block heading %}
+<center>Paws Rescue Center 🐾</center>
+{% endblock %}
+
+
+{% block content %}
+
+{% if 'user' in session %}
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Bio</th>
+    </tr>
+    <tr>
+        {% for pet in pets%}
+    <tr>
+        <td>
+            <a href="{{url_for('details', id_no = pet.id)}}">
+                <img src="{{url_for('static', filename = pet['id']|string+'.jpg')}}" height="100">
+            </a>
+        </td>
+        <td>{{ pet.name}}</td>
+        <td>{{pet.age}}</td>
+        <td>{{pet.bio}}</td>
+    </tr>
+    {% endfor %}
+    </tr>
+</table>
+{% else %}
+<h2>Please Login to Continue!!!</h2>
+{% endif %}
+
+{% endblock%}
